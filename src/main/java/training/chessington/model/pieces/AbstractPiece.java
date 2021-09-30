@@ -6,10 +6,12 @@ public abstract class AbstractPiece implements Piece {
 
     protected final Piece.PieceType type;
     protected final PlayerColour colour;
+    protected Integer moveCount;
 
     protected AbstractPiece(Piece.PieceType type, PlayerColour colour) {
         this.type = type;
         this.colour = colour;
+        moveCount = 0;
     }
 
     @Override
@@ -21,6 +23,16 @@ public abstract class AbstractPiece implements Piece {
     public PlayerColour getColour() {
         return colour;
     }
+
+    @Override
+    public Integer getMoveCount() {
+        return moveCount;
+    }
+
+    @Override
+    public void setMoveCount(Integer i) { moveCount = i; }
+
+
 
     @Override
     public String toString() {

@@ -44,6 +44,7 @@ public class Board {
     public void move(Coordinates from, Coordinates to) {
         board[to.getRow()][to.getCol()] = board[from.getRow()][from.getCol()];
         board[from.getRow()][from.getCol()] = null;
+        board[to.getRow()][to.getCol()].setMoveCount(board[to.getRow()][to.getCol()].getMoveCount() + 1);
     }
 
     public void placePiece(Coordinates coords, Piece piece) {
