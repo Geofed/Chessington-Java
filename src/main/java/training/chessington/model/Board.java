@@ -38,7 +38,12 @@ public class Board {
     }
 
     public Piece get(Coordinates coords) {
-        return board[coords.getRow()][coords.getCol()];
+        try {
+            return board[coords.getRow()][coords.getCol()];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void move(Coordinates from, Coordinates to) {
