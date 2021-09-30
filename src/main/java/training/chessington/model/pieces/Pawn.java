@@ -9,8 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends AbstractPiece {
+
+    private List<Coordinates> attackVectors = new ArrayList<>();
+
     public Pawn(PlayerColour colour) {
+
         super(Piece.PieceType.PAWN, colour);
+        attackVectors.add(new Coordinates(1, 1));
+        attackVectors.add(new Coordinates(-1, 1));
+        attackVectors.add(new Coordinates(1, -1));
+        attackVectors.add(new Coordinates(-1, -1));
+
     }
 
     @Override
@@ -18,12 +27,14 @@ public class Pawn extends AbstractPiece {
 
         List<Move> possibleMoves = new ArrayList<>();
 
-        possibleMoves.add(colour.equals(PlayerColour.BLACK) ? new Move(from, from.plus(1, 0)) : new Move(from, from.plus(-1, 0)) );
+        possibleMoves.add(CreateMove(from, new Coordinates(colour.equals(PlayerColour.BLACK) ? 1 : -1, 0)));
+
         if (this.moveCount.equals(0) && board.get(from.plus(colour.equals(PlayerColour.BLACK) ? 1 : -1, 0)) == null)
-            possibleMoves.add(colour.equals(PlayerColour.BLACK) ? new Move(from, from.plus(2, 0)) : new Move(from, from.plus(-2, 0)) );
+            possibleMoves.add(CreateMove(from, new Coordinates(colour.equals(PlayerColour.BLACK) ? 2 : -2, 0)));
 
         possibleMoves = this.CutOutOfBoundsMoves(possibleMoves, board);
         possibleMoves = this.CutOverlapMoves(possibleMoves, board);
+        possibleMoves = this.AddAttackMoves(possibleMoves, attackVectors, board, from);
 
         return possibleMoves;
 

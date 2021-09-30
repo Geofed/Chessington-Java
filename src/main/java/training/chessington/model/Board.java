@@ -41,7 +41,7 @@ public class Board {
         try {
             return board[coords.getRow()][coords.getCol()];
         } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
     }
