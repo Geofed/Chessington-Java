@@ -19,8 +19,10 @@ public class Pawn extends AbstractPiece {
         List<Move> possibleMoves = new ArrayList<>();
 
         possibleMoves.add(colour.equals(PlayerColour.BLACK) ? new Move(from, from.plus(1, 0)) : new Move(from, from.plus(-1, 0)) );
-        if (this.moveCount.equals(0))
+        if (this.moveCount.equals(0) && board.get(from.plus(colour.equals(PlayerColour.BLACK) ? 1 : -1, 0)) == null)
             possibleMoves.add(colour.equals(PlayerColour.BLACK) ? new Move(from, from.plus(2, 0)) : new Move(from, from.plus(-2, 0)) );
+
+        possibleMoves = this.CutOverlapMoves(possibleMoves, board);
 
         return possibleMoves;
 
