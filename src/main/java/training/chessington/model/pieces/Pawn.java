@@ -15,10 +15,8 @@ public class Pawn extends AbstractPiece {
     public Pawn(PlayerColour colour) {
 
         super(Piece.PieceType.PAWN, colour);
-        attackVectors.add(new Coordinates(1, 1));
-        attackVectors.add(new Coordinates(-1, 1));
-        attackVectors.add(new Coordinates(1, -1));
-        attackVectors.add(new Coordinates(-1, -1));
+
+        attackVectors = new AttackBuilder().Pawn(attackVectors);
 
     }
 
